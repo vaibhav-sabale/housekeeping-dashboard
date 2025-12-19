@@ -1,0 +1,138 @@
+.main_floor {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: .63rem;
+  overflow-x: hidden;
+}
+
+.floors {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.floor_left {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rooms {
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+}
+
+.cleaned {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+}
+
+.floor_title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.floor_right {
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.downarrow {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* GRID */
+.floor_content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.room_card {
+  min-width: 0;
+  padding: 0.63rem;
+  min-height: 4.38rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  border-radius: .032rem;
+
+}
+
+.room_card.green { background: #BCE5C4; cursor: pointer; }
+.room_card.pink  { background: #FFE5EA; cursor: pointer; }
+.room_card.blue  { background: #ADD4FF; cursor: pointer; }
+
+.card_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card_bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 0.2rem;
+}
+
+.room_no {
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.room_type {
+  padding-bottom: 1.8rem;
+  font-size: 0.69rem;
+  color: #666;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.icons {
+  display: flex;
+  gap: 0.56rem;
+  
+}
+
+.icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.13rem;
+}
+
+.icon img {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
+
+
+/* RESPONSIVE BREAKPOINTS (rem only) */
+@media (min-width: 30rem) {
+  .floor_content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 48rem) {
+  .floor_content { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .floor_content { gap: 0.88rem; }
+}
+
+/* 7 rooms on desktop */
+@media (min-width: 64rem) {
+  .floor_content { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
