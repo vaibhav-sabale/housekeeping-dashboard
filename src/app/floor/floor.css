@@ -33,6 +33,7 @@
   font-size: 0.88rem;
   font-family: 'DM Sans', sans-serif;
   color: #000000;
+  margin-left: -1.5rem;
 }
 
 .floor-right {
@@ -255,6 +256,7 @@
   border-radius: 0.63rem;
   overflow: hidden;
   padding: 1.5rem;
+  max-height: 100%
 }
 
 /* PrimeNG Accordion Styles */

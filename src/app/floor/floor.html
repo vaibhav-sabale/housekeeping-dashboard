@@ -17,8 +17,8 @@
 
       <p-accordion-content>
         <div class="floor-content">
-          @for (room of floor1Rooms; track room.number + $index) {
-          <p-card class="room-card" [ngClass]="room.statusClass">
+          @for (room of floor1Rooms; track room.number) {
+          <div class="room-card" [ngClass]="room.statusClass">
             <div class="card-top">
               <span class="room-no">{{ room.number }}</span>
               <div class="icons">
@@ -39,7 +39,7 @@
                 }
               </div>
             </div>
-          </p-card>
+          </div>
           }
         </div>
       </p-accordion-content>
@@ -61,8 +61,8 @@
 
       <p-accordion-content>
         <div class="floor-content">
-          @for (room of floor2Rooms; track room.number + $index) {
-          <p-card class="room-card" [ngClass]="room.statusClass">
+          @for (room of floor2Rooms; track room.number) {
+          <div class="room-card" [ngClass]="room.statusClass">
             <div class="card-top">
               <span class="room-no">{{ room.number }}</span>
               <div class="icons">
@@ -83,7 +83,7 @@
                 }
               </div>
             </div>
-          </p-card>
+          </div>
           }
         </div>
       </p-accordion-content>

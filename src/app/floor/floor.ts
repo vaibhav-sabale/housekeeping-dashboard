@@ -23,7 +23,7 @@ interface Room {
 })
 export class FloorComponent {
 
-  activeIndex: number[] = [0];
+  activeIndex: string[] = ['0'];
 
   floor1Rooms: Room[] = [
     {
