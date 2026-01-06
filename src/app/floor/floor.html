@@ -1,109 +1,92 @@
 <div class="floors-wrapper">
-  <!-- FLOOR 1 -->
-  <div>
-    <!-- HEADER with COLLAPSE BUTTON -->
-    <header class="floors header-row">
-      <div class="floor-left">
-        <!-- COLLAPSE/EXPAND BUTTON with SVG ICON -->
-        <button class="collapse-btn" (click)="toggleFloor(1)" [attr.aria-expanded]="floor1Expanded"
-          aria-label="Toggle Floor 1">
-          <img src="assets/floor-svg/down-arrow.svg" alt="" class="collapse-icon" [class.rotated]="!floor1Expanded" />
-        </button>
+  <p-accordion [value]="activeIndex" [multiple]="true">
 
-        <span class="floor-title">FLOOR: 1</span>
-      </div>
-
-      <div class="floor-right">
-        <span class="rooms">10 Rooms</span>
-        <span class="cleaned">5 Cleaned, 3 Dirty, 2 Inspect</span>
-      </div>
-    </header>
-
-    <!-- CONTENT - Show/Hide with @if -->
-    @if (floor1Expanded) {
-    <div class="floor-content">
-      @for (room of floor1Rooms; track room.number) {
-      <div class="room-card" [ngClass]="room.statusClass">
-        <div class="card-top">
-          <span class="room-no">{{ room.number }}</span>
-          <div class="icons">
-            @for (icon of room.iconsTop; track icon) {
-            <span class="icon">
-              <img [src]="'assets/floor-svg/' + icon" height="16" width="16" alt="" />
-            </span>
-            }
+    <!-- FLOOR 1 -->
+    <p-accordion-panel value="0">
+      <p-accordion-header>
+        <header class="floors header-row">
+          <div class="floor-left">
+            <span class="floor-title">FLOOR: 1</span>
           </div>
-        </div>
-
-        <span class="room-type">{{ room.type }}</span>
-
-        <div class="card-bottom">
-          <div class="icons">
-            @for (icon of room.iconsBottom; track icon) {
-            <span class="icon">
-              <img [src]="'assets/floor-svg/' + icon" [height]="icon === 'dnd.svg' || icon === 'mur.svg' ? 24 : 16"
-                [width]="icon === 'dnd.svg' || icon === 'mur.svg' ? 14 : 16" alt="" />
-            </span>
-            }
+          <div class="floor-right">
+            <span class="rooms">10 Rooms</span>
+            <span class="cleaned">5 Cleaned, 3 Dirty, 2 Inspect</span>
           </div>
+        </header>
+      </p-accordion-header>
+
+      <p-accordion-content>
+        <div class="floor-content">
+          @for (room of floor1Rooms; track room.number + $index) {
+          <p-card class="room-card" [ngClass]="room.statusClass">
+            <div class="card-top">
+              <span class="room-no">{{ room.number }}</span>
+              <div class="icons">
+                @for (icon of room.iconsTop; track icon) {
+                <span class="icon">
+                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                </span>
+                }
+              </div>
+            </div>
+            <span class="room-type">{{ room.type }}</span>
+            <div class="card-bottom">
+              <div class="icons">
+                @for (icon of room.iconsBottom; track icon) {
+                <span class="icon">
+                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                </span>
+                }
+              </div>
+            </div>
+          </p-card>
+          }
         </div>
-      </div>
-      }
-    </div>
-    }
-  </div>
+      </p-accordion-content>
+    </p-accordion-panel>
 
-  <!-- FLOOR 2 -->
-  <div>
-    <!-- HEADER with COLLAPSE BUTTON -->
-    <header class="floors header-row">
-      <div class="floor-left">
-        <!-- COLLAPSE/EXPAND BUTTON with SVG ICON -->
-        <button class="collapse-btn" (click)="toggleFloor(2)" [attr.aria-expanded]="floor2Expanded"
-          aria-label="Toggle Floor 2">
-          <img src="assets/floor-svg/down-arrow.svg" alt="" class="collapse-icon" [class.rotated]="!floor2Expanded" />
-        </button>
-
-        <span class="floor-title">FLOOR: 2</span>
-      </div>
-
-      <div class="floor-right">
-        <span class="rooms">6 Rooms</span>
-        <span class="cleaned">2 Cleaned, 3 Dirty, 1 Inspect</span>
-      </div>
-    </header>
-
-    <!-- CONTENT - Show/Hide with @if -->
-    @if (floor2Expanded) {
-    <div class="floor-content">
-      @for (room of floor2Rooms; track room.number) {
-      <div class="room-card" [ngClass]="room.statusClass">
-        <div class="card-top">
-          <span class="room-no">{{ room.number }}</span>
-          <div class="icons">
-            @for (icon of room.iconsTop; track icon) {
-            <span class="icon">
-              <img [src]="'assets/floor-svg/' + icon" height="16" width="16" alt="" />
-            </span>
-            }
+    <!-- FLOOR 2 -->
+    <p-accordion-panel value="1">
+      <p-accordion-header>
+        <header class="floors header-row">
+          <div class="floor-left">
+            <span class="floor-title">FLOOR: 2</span>
           </div>
-        </div>
-
-        <span class="room-type">{{ room.type }}</span>
-
-        <div class="card-bottom">
-          <div class="icons">
-            @for (icon of room.iconsBottom; track icon) {
-            <span class="icon">
-              <img [src]="'assets/floor-svg/' + icon" [height]="icon === 'dnd.svg' || icon === 'mur.svg' ? 24 : 16"
-                [width]="icon === 'dnd.svg' || icon === 'mur.svg' ? 14 : 16" alt="" />
-            </span>
-            }
+          <div class="floor-right">
+            <span class="rooms">6 Rooms</span>
+            <span class="cleaned">2 Cleaned, 3 Dirty, 1 Inspect</span>
           </div>
+        </header>
+      </p-accordion-header>
+
+      <p-accordion-content>
+        <div class="floor-content">
+          @for (room of floor2Rooms; track room.number + $index) {
+          <p-card class="room-card" [ngClass]="room.statusClass">
+            <div class="card-top">
+              <span class="room-no">{{ room.number }}</span>
+              <div class="icons">
+                @for (icon of room.iconsTop; track icon) {
+                <span class="icon">
+                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                </span>
+                }
+              </div>
+            </div>
+            <span class="room-type">{{ room.type }}</span>
+            <div class="card-bottom">
+              <div class="icons">
+                @for (icon of room.iconsBottom; track icon) {
+                <span class="icon">
+                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                </span>
+                }
+              </div>
+            </div>
+          </p-card>
+          }
         </div>
-      </div>
-      }
-    </div>
-    }
-  </div>
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
 </div>

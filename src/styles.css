@@ -17,7 +17,7 @@
   --btn-primary-width: 8.94rem;
 
 
-  --font-family-base: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-family-base: "DM Sans";
 
   --toggle-width: 12.13rem;
   --toggle-pad: 0.19rem;
@@ -44,28 +44,8 @@ input {
 body {
   background: var(--page-bg);
   font-family: var(--font-family-base);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: .25rem;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
 /* Focus states */
 :focus-visible {
@@ -80,7 +60,7 @@ button:focus-visible {
 
 input:focus-visible,
 textarea:focus-visible {
-  outline: .13rem  solid #3b82f6;
+  outline: .13rem solid #3b82f6;
   outline-offset: .13rem;
 }
 
@@ -148,4 +128,18 @@ textarea:focus-visible {
   a {
     text-decoration: underline;
   }
+}
+
+
+.topbar,
+.dark-strip {
+  flex: 0 0 auto !important;
+}
+
+.floors-wrapper {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: calc(100vh - 20rem) !important;
+  scrollbar-width: thin !important;
 }

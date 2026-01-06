@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgClass } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
+import { CardModule } from 'primeng/card';
 
 type StatusClass = 'cleaned' | 'dirty' | 'inspect';
 
@@ -16,14 +17,13 @@ interface Room {
 @Component({
   selector: 'app-floor',
   standalone: true,
-  imports: [CommonModule, NgClass, AccordionModule],
+  imports: [CommonModule, NgClass, AccordionModule, CardModule],
   templateUrl: './floor.html',
   styleUrls: ['./floor.css'],
 })
 export class FloorComponent {
-  // Track which floors are open/closed
-  floor1Expanded: boolean = true;   // open by default
-  floor2Expanded: boolean = false;  // closed by default
+
+  activeIndex: number[] = [0];
 
   floor1Rooms: Room[] = [
     {
@@ -142,13 +142,4 @@ export class FloorComponent {
       iconsBottom: ['guest-req.svg', 'maintenance.svg', 'dnd.svg'],
     }
   ];
-
-  // Toggle floor expand/collapse
-  toggleFloor(floorNumber: number) {
-    if (floorNumber === 1) {
-      this.floor1Expanded = !this.floor1Expanded;
-    } else {
-      this.floor2Expanded = !this.floor2Expanded;
-    }
-  }
 }
