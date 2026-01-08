@@ -48,35 +48,6 @@ body {
   font-family: var(--font-family-base);
 }
 
-
-/* Focus states */
-:focus-visible {
-  outline: .13rem solid #3b82f6;
-  outline-offset: .13rem;
-}
-
-button:focus-visible {
-  outline: .13rem solid #3b82f6;
-  outline-offset: .13rem;
-}
-
-input:focus-visible,
-textarea:focus-visible {
-  outline: .13rem solid #3b82f6;
-  outline-offset: .13rem;
-}
-
-/* Text selection */
-::selection {
-  background-color: rgba(183, 33, 255, 0.2);
-  color: inherit;
-}
-
-::-moz-selection {
-  background-color: rgba(183, 33, 255, 0.2);
-  color: inherit;
-}
-
 /* Global responsive font size */
 @media (max-width: 48rem) {
   :root {
@@ -131,7 +102,6 @@ textarea:focus-visible {
     text-decoration: underline;
   }
 }
-
 
 .topbar,
 .dark-strip {

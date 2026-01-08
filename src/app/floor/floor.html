@@ -1,30 +1,31 @@
 <div class="floors-wrapper">
   <p-accordion [value]="activeIndex" [multiple]="true">
 
-    <!-- FLOOR 1 -->
-    <p-accordion-panel value="0">
+    @for (floor of floors; track floor.id) {
+    <p-accordion-panel [value]="floor.id">
       <p-accordion-header>
         <header class="floors header-row">
           <div class="floor-left">
-            <span class="floor-title">FLOOR: 1</span>
+            <span class="floor-title">FLOOR: {{ floor.floorNumber }}</span>
           </div>
           <div class="floor-right">
-            <span class="rooms">10 Rooms</span>
-            <span class="cleaned">5 Cleaned, 3 Dirty, 2 Inspect</span>
+            <span class="rooms">{{ floor.totalRooms }} Rooms</span>
+            <span class="cleaned">{{ floor.cleaned }} Cleaned, {{ floor.dirty }} Dirty, {{ floor.inspect }}
+              Inspect</span>
           </div>
         </header>
       </p-accordion-header>
 
       <p-accordion-content>
         <div class="floor-content">
-          @for (room of floor1Rooms; track room.number) {
+          @for (room of floor.rooms; track room.number) {
           <div class="room-card" [ngClass]="room.statusClass">
             <div class="card-top">
               <span class="room-no">{{ room.number }}</span>
               <div class="icons">
                 @for (icon of room.iconsTop; track icon) {
                 <span class="icon">
-                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                  <img [src]="'assets/floor-svg/' + icon" />
                 </span>
                 }
               </div>
@@ -34,7 +35,7 @@
               <div class="icons">
                 @for (icon of room.iconsBottom; track icon) {
                 <span class="icon">
-                  <img [src]="'assets/floor-svg/' + icon" alt="" />
+                  <img [src]="'assets/floor-svg/' + icon" />
                 </span>
                 }
               </div>
@@ -44,49 +45,7 @@
         </div>
       </p-accordion-content>
     </p-accordion-panel>
+    }
 
-    <!-- FLOOR 2 -->
-    <p-accordion-panel value="1">
-      <p-accordion-header>
-        <header class="floors header-row">
-          <div class="floor-left">
-            <span class="floor-title">FLOOR: 2</span>
-          </div>
-          <div class="floor-right">
-            <span class="rooms">6 Rooms</span>
-            <span class="cleaned">2 Cleaned, 3 Dirty, 1 Inspect</span>
-          </div>
-        </header>
-      </p-accordion-header>
-
-      <p-accordion-content>
-        <div class="floor-content">
-          @for (room of floor2Rooms; track room.number) {
-          <div class="room-card" [ngClass]="room.statusClass">
-            <div class="card-top">
-              <span class="room-no">{{ room.number }}</span>
-              <div class="icons">
-                @for (icon of room.iconsTop; track icon) {
-                <span class="icon">
-                  <img [src]="'assets/floor-svg/' + icon" alt="" />
-                </span>
-                }
-              </div>
-            </div>
-            <span class="room-type">{{ room.type }}</span>
-            <div class="card-bottom">
-              <div class="icons">
-                @for (icon of room.iconsBottom; track icon) {
-                <span class="icon">
-                  <img [src]="'assets/floor-svg/' + icon" alt="" />
-                </span>
-                }
-              </div>
-            </div>
-          </div>
-          }
-        </div>
-      </p-accordion-content>
-    </p-accordion-panel>
   </p-accordion>
 </div>

@@ -4,7 +4,7 @@
       <!-- LEFT SIDE: Breadcrumb -->
       <div class="breadcrumb">
         <button class="back-btn" type="button" aria-label="Back">
-          <img class="icon" src="assets/svg/arrow-left.svg" alt="">
+          <i class="pi pi-arrow-left"></i>
         </button>
         <span class="breadcrumb-muted">Unicorn Groups / Radiant Retreat /</span>
         <span class="breadcrumb-active">Task Management</span>
@@ -16,13 +16,16 @@
           <a class="logo-link" aria-label="Aura home">
             <img class="logo" src="assets/svg/aura-logo.svg" alt="aura">
           </a>
+
           <button class="icon-btn icon-btn--label" type="button" aria-label="Chat">
             <img class="icon" src="assets/svg/chat.svg" alt="">
             <span class="icon-label">Chat</span>
           </button>
+
           <button class="icon-btn" type="button" aria-label="Notifications">
-            <img class="icon" src="assets/svg/notifications.svg" alt="">
+            <i class="pi pi-bell"></i>
           </button>
+
           <button class="icon-btn" type="button" aria-label="Apps">
             <img class="icon" src="assets/svg/menu.svg" alt="">
           </button>
@@ -33,17 +36,17 @@
     <div class="page-header">
       <h1 class="page-title">Property Overview</h1>
 
+      <!-- PrimeNG toggle -->
       <div class="toolbar">
         <div class="view-toggle selectbtn" aria-label="View toggle">
-          <p-selectbutton [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value"
+          <p-selectbutton
+            [options]="stateOptions"
+            [(ngModel)]="value"
+            optionLabel="label"
+            optionValue="value"
             aria-labelledby="basic">
           </p-selectbutton>
         </div>
-
-        <!-- <div class="search-box">
-          <img class="icon icon--xs" src="assets/svg/search.svg" alt="">
-          <input class="search-input" type="text" placeholder="Search">
-        </div> -->
 
         <div class="card flex flex-col items-center gap-4">
           <p-iconfield>
@@ -57,13 +60,13 @@
         </div>
 
         <button class="pill" type="button">
-          <img class="icon icon--sm" src="assets/svg/filters.svg" alt="">
+          <i class="pi pi-filter"></i>
           Filters
         </button>
 
         <button class="btn-primary" type="button">
           Auto Assign
-          <img class="icon icon--sm" src="assets/svg/auto-assign-spark.svg" alt="">
+          <i class="pi pi-sparkles"></i>
         </button>
       </div>
     </div>
@@ -100,30 +103,19 @@
 
                 <!-- legend labels -->
                 <div class="legend--labels">
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--dirty"></span>
-                    Dirty
-                  </div>
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--inprogress"></span>
-                    In Progress
-                  </div>
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--inspect"></span>
-                    Inspect
-                  </div>
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--cleaned"></span>
-                    Cleaned
-                  </div>
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--out"></span>
-                    Out of Service
-                  </div>
-                  <div class="legend--item">
-                    <span class="legend--color legend--color--order"></span>
-                    Out of Order
-                  </div>
+                  @for (item of [
+                    { cls: 'dirty', label: 'Dirty' },
+                    { cls: 'inprogress', label: 'In Progress' },
+                    { cls: 'inspect', label: 'Inspect' },
+                    { cls: 'cleaned', label: 'Cleaned' },
+                    { cls: 'out', label: 'Out of Service' },
+                    { cls: 'order', label: 'Out of Order' }
+                  ]; track item.cls) {
+                    <div class="legend--item">
+                      <span class="legend--color" [ngClass]="'legend--color--' + item.cls"></span>
+                      {{ item.label }}
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -131,6 +123,7 @@
 
           <div class="summary-right">
             <div class="kpi-grid">
+              <!-- Occupancy card -->
               <p-card class="kpi-card kpi-card--occupancy" role="region">
                 <div class="kpi-body kpi-body--occupancy">
                   <div class="kpi-title-oc">Occupancy</div>
@@ -145,50 +138,27 @@
                 </div>
               </p-card>
 
-              <p-card class="kpi-card kpi-card--small" role="region">
-                <div class="kpi-body kpi-body--compact">
-                  <div class="kpi-title">Arrival</div>
-                  <div class="kpi-value">42</div>
-                  <div class="kpi-foot">
-                    <span class="kpi-chip kpi-chip--pos">+2.0%</span>
-                    <span class="kpi-note">From last week </span>
+              <!-- KPI cards -->
+              @for (kpi of [
+                { title: 'Arrival', value: '42', chipClass: 'kpi-chip--pos', chipText: '+2.0%', note: 'From last week ', icon: 'arrival.svg' },
+                { title: 'Departure', value: '42', chipClass: 'kpi-chip--neg', chipText: '-2.1%', note: 'From last week', icon: 'departure.svg' },
+                { title: 'Guest Request', value: '42', chipClass: 'kpi-chip--pos', chipText: '4.5 min', note: 'Avg. service time', icon: 'guest-request.svg' }
+              ]; track kpi.title) {
+                <p-card class="kpi-card kpi-card--small" role="region">
+                  <div class="kpi-body kpi-body--compact">
+                    <div class="kpi-title">{{ kpi.title }}</div>
+                    <div class="kpi-value">{{ kpi.value }}</div>
+                    <div class="kpi-foot">
+                      <span class="kpi-chip" [ngClass]="kpi.chipClass">{{ kpi.chipText }}</span>
+                      <span class="kpi-note">{{ kpi.note }}</span>
+                    </div>
                   </div>
-                </div>
 
-                <div class="kpi-icon-wrap" aria-hidden="true">
-                  <img class="kpi-icon" src="assets/svg/arrival.svg" alt="">
-                </div>
-              </p-card>
-
-              <p-card class="kpi-card kpi-card--small" role="region">
-                <div class="kpi-body kpi-body--compact">
-                  <div class="kpi-title">Departure</div>
-                  <div class="kpi-value">42</div>
-                  <div class="kpi-foot">
-                    <span class="kpi-chip kpi-chip--neg">-2.1%</span>
-                    <span class="kpi-note">From last week</span>
+                  <div class="kpi-icon-wrap" aria-hidden="true">
+                    <img class="kpi-icon" [src]="'assets/svg/' + kpi.icon" alt="">
                   </div>
-                </div>
-
-                <div class="kpi-icon-wrap" aria-hidden="true">
-                  <img class="kpi-icon" src="assets/svg/departure.svg" alt="">
-                </div>
-              </p-card>
-
-              <p-card class="kpi-card kpi-card--small" role="region">
-                <div class="kpi-body kpi-body--compact">
-                  <div class="kpi-title">Guest Request</div>
-                  <div class="kpi-value">42</div>
-                  <div class="kpi-foot">
-                    <span class="kpi-chip kpi-chip--pos">4.5 min</span>
-                    <span class="kpi-note">Avg. service time</span>
-                  </div>
-                </div>
-
-                <div class="kpi-icon-wrap" aria-hidden="true">
-                  <img class="kpi-icon" src="assets/svg/guest-request.svg" alt="">
-                </div>
-              </p-card>
+                </p-card>
+              }
             </div>
           </div>
         </section>
