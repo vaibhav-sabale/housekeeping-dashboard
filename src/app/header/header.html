@@ -1,17 +1,17 @@
 <div class="app">
   <header class="topbar">
-    <p-toolbar aria-label="Topbar Navigation" class="topbar">
-      <!-- LEFT SIDE: Breadcrumb -->
-      <div class="breadcrumb">
-        <button class="back-btn" type="button" aria-label="Back">
-          <i class="pi pi-arrow-left"></i>
-        </button>
-        <span class="breadcrumb-muted">Unicorn Groups / Radiant Retreat /</span>
-        <span class="breadcrumb-active">Task Management</span>
-      </div>
+    <p-toolbar>
+      <ng-template #start>
+        <div class="breadcrumb">
+          <button class="back-btn" type="button" aria-label="Back">
+            <i class="pi pi-arrow-left"></i>
+          </button>
+          <span class="breadcrumb-muted">Unicorn Groups / Radiant Retreat /</span>
+          <span class="breadcrumb-active">Task Management</span>
+        </div>
+      </ng-template>
 
-      <!-- RIGHT SIDE: Actions -->
-      <ng-container pToolbarRight>
+      <ng-template #end>
         <div class="topbar-actions">
           <a class="logo-link" aria-label="Aura home">
             <img class="logo" src="assets/svg/aura-logo.svg" alt="aura">
@@ -30,7 +30,7 @@
             <img class="icon" src="assets/svg/menu.svg" alt="">
           </button>
         </div>
-      </ng-container>
+      </ng-template>
     </p-toolbar>
 
     <div class="page-header">
@@ -39,11 +39,7 @@
       <!-- PrimeNG toggle -->
       <div class="toolbar">
         <div class="view-toggle selectbtn" aria-label="View toggle">
-          <p-selectbutton
-            [options]="stateOptions"
-            [(ngModel)]="value"
-            optionLabel="label"
-            optionValue="value"
+          <p-selectbutton [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value"
             aria-labelledby="basic">
           </p-selectbutton>
         </div>
@@ -79,44 +75,29 @@
           <div class="summary-left">
             <div class="page--legend-column">
               <div class="legend">
+
                 <!-- multi‑color progress bar -->
                 <div class="legend--bar">
-                  <div class="legend--segment legend--segment--dirty" style="flex: 20">
-                    <span class="legend--percent">20%</span>
-                  </div>
-                  <div class="legend--segment legend--segment--inprogress" style="flex: 14">
-                    <span class="legend--percent">14%</span>
-                  </div>
-                  <div class="legend--segment legend--segment--cleaned" style="flex: 52">
-                    <span class="legend--percent">52%</span>
-                  </div>
-                  <div class="legend--segment legend--segment--inspect" style="flex: 10">
-                    <span class="legend--percent">10%</span>
-                  </div>
-                  <div class="legend--segment legend--segment--out" style="flex: 3">
-                    <span class="legend--percent">3%</span>
-                  </div>
-                  <div class="legend--segment legend--segment--order" style="flex: 1">
-                    <span class="legend--percent">1%</span>
-                  </div>
+                  <p-metergroup [value]="progressValue">
+                    <ng-template #meter let-value let-class="class" let-width="size">
+                      <span [class]="class" [style]="{ background: value.color, width: width }">
+                        <span class="text-grp">{{value.value}}%</span>
+                      </span>
+                    </ng-template>
+                    <ng-template #label>
+                      <div class="legend-labels-grid">
+                        @for (item of progressValue; track item.label; let i = $index) {
+                          <div class="meter-item">
+                            <i class="pi pi-minus" [style.color]="item.color"></i>
+                            <span class="meter-label">{{ item.label }}</span>
+                          </div>
+                        }
+                      </div>
+                    </ng-template>
+                  </p-metergroup>
                 </div>
 
-                <!-- legend labels -->
-                <div class="legend--labels">
-                  @for (item of [
-                    { cls: 'dirty', label: 'Dirty' },
-                    { cls: 'inprogress', label: 'In Progress' },
-                    { cls: 'inspect', label: 'Inspect' },
-                    { cls: 'cleaned', label: 'Cleaned' },
-                    { cls: 'out', label: 'Out of Service' },
-                    { cls: 'order', label: 'Out of Order' }
-                  ]; track item.cls) {
-                    <div class="legend--item">
-                      <span class="legend--color" [ngClass]="'legend--color--' + item.cls"></span>
-                      {{ item.label }}
-                    </div>
-                  }
-                </div>
+
               </div>
             </div>
           </div>
@@ -133,31 +114,30 @@
                   </div>
                 </div>
 
-                <div class="kpi-ring" role="img" aria-label="Occupancy 25%">
-                  <img class="kpi-ring-img" src="assets/svg/occupancy.svg" alt="">
+                <div class="card flex justify-center">
+                  <p-chart type="doughnut" [data]="data" [options]="options" [plugins]="plugins"
+                    class="w-full md:w-[30rem]">
+                  </p-chart>
                 </div>
+
               </p-card>
 
               <!-- KPI cards -->
-              @for (kpi of [
-                { title: 'Arrival', value: '42', chipClass: 'kpi-chip--pos', chipText: '+2.0%', note: 'From last week ', icon: 'arrival.svg' },
-                { title: 'Departure', value: '42', chipClass: 'kpi-chip--neg', chipText: '-2.1%', note: 'From last week', icon: 'departure.svg' },
-                { title: 'Guest Request', value: '42', chipClass: 'kpi-chip--pos', chipText: '4.5 min', note: 'Avg. service time', icon: 'guest-request.svg' }
-              ]; track kpi.title) {
-                <p-card class="kpi-card kpi-card--small" role="region">
-                  <div class="kpi-body kpi-body--compact">
-                    <div class="kpi-title">{{ kpi.title }}</div>
-                    <div class="kpi-value">{{ kpi.value }}</div>
-                    <div class="kpi-foot">
-                      <span class="kpi-chip" [ngClass]="kpi.chipClass">{{ kpi.chipText }}</span>
-                      <span class="kpi-note">{{ kpi.note }}</span>
-                    </div>
+              @for (kpi of kpis; track kpi.title) {
+              <p-card class="kpi-card kpi-card--small" role="region">
+                <div class="kpi-body kpi-body--compact">
+                  <div class="kpi-title">{{ kpi.title }}</div>
+                  <div class="kpi-value">{{ kpi.value }}</div>
+                  <div class="kpi-foot">
+                    <span class="kpi-chip" [ngClass]="kpi.chipClass">{{ kpi.chipText }}</span>
+                    <span class="kpi-note">{{ kpi.note }}</span>
                   </div>
+                </div>
 
-                  <div class="kpi-icon-wrap" aria-hidden="true">
-                    <img class="kpi-icon" [src]="'assets/svg/' + kpi.icon" alt="">
-                  </div>
-                </p-card>
+                <div class="kpi-icon-wrap" aria-hidden="true">
+                  <img class="kpi-icon" [src]="'assets/svg/' + kpi.icon" alt="">
+                </div>
+              </p-card>
               }
             </div>
           </div>

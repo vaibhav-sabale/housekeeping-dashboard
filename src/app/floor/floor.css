@@ -268,15 +268,3 @@
   order: -1 !important;
 }
 
-/* PrimeNG Card for Rooms */
-::ng-deep .room-card.p-card {
-  box-shadow: none;
-}
-
-::ng-deep .room-card .p-card-body {
-  padding: 0.63rem !important;
-}
-
-::ng-deep .room-card .p-card-content {
-  padding: 0 !important;
-}

@@ -21,11 +21,7 @@
 
   --font-family-base: "DM Sans";
 
-  --toggle-width: 12.13rem;
-  --toggle-pad: 0.19rem;
-  --toggle-gap: 0.13rem;
-  --toggle-bg: #39404a;
-  --toggle-active-bg: #1a232e;
+
 }
 
 * {
@@ -83,23 +79,6 @@ body {
   select {
     min-height: 2.75rem;
     font-size: 1rem;
-  }
-}
-
-/* Print */
-@media print {
-  body {
-    background: white;
-  }
-
-  .topbar,
-  .toolbar,
-  .pagination {
-    display: none;
-  }
-
-  a {
-    text-decoration: underline;
   }
 }
 
